@@ -16,7 +16,7 @@ and star-rated (1–5 ★) by learning value.
 | Database   | PostgreSQL 16, Flyway migrations                                        |
 | Frontend   | React 19 + TypeScript + Vite, React Router, TanStack Query, Tailwind CSS |
 | Files      | Local filesystem (configurable dir); Postgres stores metadata only      |
-| AI         | Anthropic Java SDK (`com.anthropic:anthropic-java`), model `claude-opus-4-8`, structured JSON outputs |
+| AI         | Anthropic Java SDK (`com.anthropic:anthropic-java`), model `claude-sonnet-5` at `effort: high`, structured JSON outputs |
 | Dev infra  | `docker-compose.yml` for PostgreSQL; README with run instructions       |
 
 ### Decisions taken by default (easy to change — please confirm)
@@ -144,7 +144,8 @@ A small backend service (`RecommendationService`) built on the official
 
 - Client: `AnthropicOkHttpClient.fromEnv()` — reads `ANTHROPIC_API_KEY` from
   the environment; the key never appears in code or config files.
-- Model: **`claude-opus-4-8`**.
+- Model: **`claude-sonnet-5`** with **`effort: high`** (set explicitly in
+  `output_config`; adaptive thinking is the model's default).
 - **Structured output**: the SDK's typed `outputConfig(Class)` derives a JSON
   schema from Java records, so the response parses directly into objects — no
   brittle string parsing:
@@ -160,9 +161,9 @@ record RecommendationList(List<Resource> resources) {}
 
 StructuredMessageCreateParams<RecommendationList> params =
     MessageCreateParams.builder()
-        .model(Model.CLAUDE_OPUS_4_8)
+        .model("claude-sonnet-5")
         .maxTokens(8000L)
-        .outputConfig(RecommendationList.class)
+        .outputConfig(RecommendationList.class)   // + effort HIGH on the config
         .addUserMessage(prompt)   // skill name + description
         .build();
 ```
