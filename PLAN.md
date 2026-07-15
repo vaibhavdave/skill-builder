@@ -181,11 +181,18 @@ StructuredMessageCreateParams<RecommendationList> params =
 ## 6. Frontend (React)
 
 ### Pages
+- **App shell** — header with app name and a **theme toggle** (light / dark /
+  system). Implemented with Tailwind's `dark:` class strategy: the choice is
+  persisted in `localStorage`, defaults to the OS preference
+  (`prefers-color-scheme`), and applies instantly with no flash on reload
+  (a tiny inline script sets the class before first paint). Every component
+  is styled for both themes.
 - **Dashboard `/`** — grid of skill cards (name, description, counts),
   “New Skill” dialog, delete/edit.
 - **Skill detail `/skills/:id`** — header + three tabs:
   - **Documents** — drag-and-drop / file-picker upload with progress, list with
-    type icon, size, notes; download & delete.
+    type icon, size, notes; **View** opens PDFs inline in a new browser tab
+    (served with `Content-Disposition: inline`), plus download & delete.
   - **Courses** — add link form (URL, title, provider, notes), list with status
     chips (To start / In progress / Completed) toggled inline.
   - **Recommended** — "Generate with Claude" button (spinner while running);
@@ -198,7 +205,7 @@ StructuredMessageCreateParams<RecommendationList> params =
 - Vite dev server proxies `/api` → `localhost:8080` (no CORS pain).
 - TanStack Query for all server state; no Redux needed.
 - Tailwind CSS for styling; small reusable components (Card, Tabs, StatusBadge,
-  FileDropzone, StarRating).
+  FileDropzone, StarRating, ThemeToggle).
 
 ---
 
