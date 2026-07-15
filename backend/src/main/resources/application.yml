@@ -2,7 +2,7 @@ spring:
   application:
     name: skill-builder
   datasource:
-    url: ${DB_URL:jdbc:postgresql://localhost:5432/skillbuilder}
+    url: ${DB_URL:jdbc:postgresql://localhost:5448/skillbuilder}
     username: ${DB_USERNAME:skillbuilder}
     password: ${DB_PASSWORD:skillbuilder}
   jpa:

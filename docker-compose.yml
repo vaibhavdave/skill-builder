@@ -7,7 +7,7 @@ services:
       POSTGRES_USER: skillbuilder
       POSTGRES_PASSWORD: skillbuilder
     ports:
-      - "5432:5432"
+      - "5448:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
     healthcheck:

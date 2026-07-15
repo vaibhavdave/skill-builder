@@ -44,7 +44,7 @@ which returns a clear message telling you to configure the key.
 
 | Environment variable | Default | Purpose |
 |----------------------|---------|---------|
-| `DB_URL`             | `jdbc:postgresql://localhost:5432/skillbuilder` | Postgres JDBC URL |
+| `DB_URL`             | `jdbc:postgresql://localhost:5448/skillbuilder` | Postgres JDBC URL |
 | `DB_USERNAME`        | `skillbuilder` | DB user |
 | `DB_PASSWORD`        | `skillbuilder` | DB password |
 | `STORAGE_ROOT`       | `./data/uploads` | Where uploaded files are stored on disk |
